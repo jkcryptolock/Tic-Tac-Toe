@@ -9,25 +9,25 @@ const play = document.querySelectorAll('.grid-item');
 
 for (let i = 0; i < play.length; i++) {
     play[i].addEventListener('click', (event) => {
-        if (currentPlayer === 'X') {
-            document.getElementById(event.target.id).textContent = currentPlayer;
-            if (checkForWinner()) {
-                window.alert(`X wins!`);
-                xWins += 1;
-                document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
-                clearBoard();
-            } else {
-                currentPlayer = 'O'
-            }
-        } else if (currentPlayer === 'O') {
-            document.getElementById(event.target.id).textContent = currentPlayer;
-            if (checkForWinner()) {
-                window.alert(`O wins!`);
-                oWins += 1;
-                document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
-                clearBoard();
-            } else {
-                currentPlayer = 'X'
+        if (!document.getElementById(event.target.id).textContent && !checkForWinner()){
+            if (currentPlayer === 'X') {
+                document.getElementById(event.target.id).textContent = 'X';
+                if (checkForWinner()) {
+                    xWins += 1;
+                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                    setTimeout(() => alert(`X wins!`), 1000);
+                } else {
+                    currentPlayer = 'O'
+                }
+            } else if (currentPlayer === 'O') {
+                document.getElementById(event.target.id).textContent = 'O';
+                if (checkForWinner()) {
+                    oWins += 1;
+                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                    setTimeout(() => alert(`O wins!`), 1000);
+                } else {
+                    currentPlayer = 'X'
+                }
             }
         }
 
@@ -76,5 +76,4 @@ const btn = document.getElementById('new-game');
 
 btn.addEventListener('click', (event) => {
     clearBoard();
-    document.getElementById('current').textContent = `Current Player: X`
 })

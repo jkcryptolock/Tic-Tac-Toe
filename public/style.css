@@ -1,14 +1,14 @@
 body {
-    background-color: blueviolet;
+  background-color: blueviolet;
 }
 
 p {
-    font-family: 'Verdana';
+  font-family: 'Verdana';
 }
 
 #title {
-    display: inline-block;
-    font-family: 'Verdana';
+  display: inline-block;
+  font-family: 'Verdana';
 }
 
 .main-container {
@@ -16,9 +16,11 @@ p {
   width: 100%;
   text-align: center;
 }
+
 .board-container {
-    display: inline-block;
+  display: inline-block;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: 150px 150px 150px;
