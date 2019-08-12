@@ -8,40 +8,40 @@ if (round === 0) {
 const play = document.querySelectorAll('.grid-item');
 
 for (let i = 0; i < play.length; i++) {
-
     play[i].addEventListener('click', (event) => {
         if (!document.getElementById(event.target.id).textContent && !checkForWinner()) {
             if (currentPlayer === 'X') {
-                document.getElementById(event.target.id).textContent = 'X';
-                if (checkForWinner()) {
-                    xWins += 1;
-                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
-                    setTimeout(() => alert(`X wins!`), 1000);
-                } else {
-                    currentPlayer = 'O';
-                    if (checkForTie()){
-                        alert('There is no winner!');
-                    }
-                }
+                playLogic('X');
             } else if (currentPlayer === 'O') {
-                document.getElementById(event.target.id).textContent = 'O';
-                if (checkForWinner()) {
-                    oWins += 1;
-                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
-                    setTimeout(() => alert(`O wins!`), 1000);
-                } else {
-                    currentPlayer = 'X';
-                    if (checkForTie()) {
-                        alert('There is no winner!');
-                    }
-                }
+                playLogic('O');
             }
         }
-
         document.getElementById('current').textContent = `Current Player: ${currentPlayer}`;
-
     });
-}
+};
+
+const playLogic = (player) => {
+    document.getElementById(event.target.id).textContent = player;
+    if (checkForWinner()) {
+        if (player === 'X') {
+            xWins += 1;
+            document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
+            setTimeout(() => alert(`X wins!`), 1000);
+        } else if (player === 'O') {
+            oWins += 1;
+            document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
+            setTimeout(() => alert(`O wins!`), 1000);
+        }
+    } else if (checkForTie()){
+        alert('There is no winner!');
+    } else {
+        if (player === 'X') {
+            currentPlayer = 'O';
+        } else if (player === 'O'){
+            currentPlayer = 'X'
+        }
+    }
+};
 
 const checkForTie = () => {
 
