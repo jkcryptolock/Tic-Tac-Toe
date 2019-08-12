@@ -1,39 +1,42 @@
-let turn = 0, xWins = 0, oWins = 0;
-let currentPlayer = 'X';
+let round = 0, xWins = 0, oWins = 0;
+let currentPlayer;
 
+if (round === 0) {
+    currentPlayer = 'X';
+}
 
 const play = document.querySelectorAll('.grid-item');
 
 for (let i = 0; i < play.length; i++) {
     play[i].addEventListener('click', (event) => {
-        if (turn === 0 || turn % 2 === 0) {
-            currentPlayer = 'X';
-            document.getElementById('current').textContent = `Current Player: O`
+        if (currentPlayer === 'X') {
             document.getElementById(event.target.id).textContent = currentPlayer;
-            turn += 1;
-        } else {
-            currentPlayer = 'O';
-            document.getElementById('current').textContent = `Current Player: X`
+            if (checkForWinner()) {
+                window.alert(`X wins!`);
+                xWins += 1;
+                document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                clearBoard();
+            } else {
+                currentPlayer = 'O'
+            }
+        } else if (currentPlayer === 'O') {
             document.getElementById(event.target.id).textContent = currentPlayer;
-            turn += 1;
+            if (checkForWinner()) {
+                window.alert(`O wins!`);
+                oWins += 1;
+                document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                clearBoard();
+            } else {
+                currentPlayer = 'X'
+            }
         }
 
-        if (checkForWinner()) {
-            window.alert(`${currentPlayer} wins!`);
-            if (currentPlayer === 'X') {
-                xWins += 1;
-            } else if (currentPlayer === 'O') {
-                oWins += 1;
-            }
-            document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
-            clearBoard();
-        };
+        document.getElementById('current').textContent = `Current Player: ${currentPlayer}`
 
     })
 }
 
 const checkForWinner = () => {
-    let winner = false;;
 
     let topLeft = document.getElementById('tleft').textContent;
     let topMid = document.getElementById('tmid').textContent;
@@ -57,24 +60,19 @@ const checkForWinner = () => {
     for (let i = 0; i < winningCombos.length; i++) {
         let combo = winningCombos[i];
         if (combo.every(value => value === 'X') || combo.every(value => value === 'O')) {
-            winner = true;
+            return true;
         }
     }
 
-    return winner;
-
 };
-
-const btn = document.getElementById('new-game');
 
 const clearBoard = () => {
     for (let i = 0; i < play.length; i++) {
         play[i].textContent = '';
     }
-    turn = 0;
-    currentPlayer = 'X';
-    document.getElementById('current').textContent = `Current Player: X`
 }
+
+const btn = document.getElementById('new-game');
 
 btn.addEventListener('click', (event) => {
     clearBoard();
