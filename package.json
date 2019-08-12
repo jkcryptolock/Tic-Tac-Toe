@@ -1,0 +1,29 @@
+{
+  "name": "hratx43-mini-app-1",
+  "version": "1.0.0",
+  "description": "tic-tac-toe app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkcryptolock/Tic-Tac-Toe.git"
+  },
+  "keywords": [
+    "mini-app",
+    "tic-tac-toe"
+  ],
+  "author": "John Connolly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkcryptolock/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/jkcryptolock/Tic-Tac-Toe#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
+    "path": "^0.12.7"
+  }
+}
