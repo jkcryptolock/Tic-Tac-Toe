@@ -5,4 +5,4 @@ const port = 3000;
 
 app.use(express.static('public'));
 
-app.listen(port, () => console.log(`Tic-Tac-Toe app listening on port ${port}!`))
+app.listen(process.env.PORT || port, () => console.log(`Tic-Tac-Toe app listening on port ${port}!`))
