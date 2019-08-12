@@ -71,7 +71,7 @@ const checkForWinner = () => {
                          [topMid, midMid, bottomMid],
                          [topRight, midRight, bottomRight],
                          [topLeft, midMid, bottomRight],
-                         [topRight, midMid, bottomRight]];
+                         [topRight, midMid, bottomLeft]];
     
     for (let i = 0; i < winningCombos.length; i++) {
         let combo = winningCombos[i];
