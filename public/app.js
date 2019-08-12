@@ -1,5 +1,5 @@
 let round = 0, xWins = 0, oWins = 0;
-let currentPlayer;
+let currentPlayer, values;
 
 if (round === 0) {
     currentPlayer = 'X';
@@ -8,33 +8,49 @@ if (round === 0) {
 const play = document.querySelectorAll('.grid-item');
 
 for (let i = 0; i < play.length; i++) {
+
     play[i].addEventListener('click', (event) => {
-        if (!document.getElementById(event.target.id).textContent && !checkForWinner()){
+        if (!document.getElementById(event.target.id).textContent && !checkForWinner()) {
             if (currentPlayer === 'X') {
                 document.getElementById(event.target.id).textContent = 'X';
                 if (checkForWinner()) {
                     xWins += 1;
-                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
                     setTimeout(() => alert(`X wins!`), 1000);
                 } else {
-                    currentPlayer = 'O'
+                    currentPlayer = 'O';
+                    if (checkForTie()){
+                        alert('There is no winner!');
+                    }
                 }
             } else if (currentPlayer === 'O') {
                 document.getElementById(event.target.id).textContent = 'O';
                 if (checkForWinner()) {
                     oWins += 1;
-                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`
+                    document.getElementById('wins').textContent = `Number of Wins: X: ${xWins} | O: ${oWins}`;
                     setTimeout(() => alert(`O wins!`), 1000);
                 } else {
-                    currentPlayer = 'X'
+                    currentPlayer = 'X';
+                    if (checkForTie()) {
+                        alert('There is no winner!');
+                    }
                 }
             }
         }
 
-        document.getElementById('current').textContent = `Current Player: ${currentPlayer}`
+        document.getElementById('current').textContent = `Current Player: ${currentPlayer}`;
 
-    })
+    });
 }
+
+const checkForTie = () => {
+
+    values = Array.from(play).map(node => node.textContent);
+    if (values.every(value => value !== '')){
+        return true;
+    }
+
+};
 
 const checkForWinner = () => {
 
@@ -67,13 +83,15 @@ const checkForWinner = () => {
 };
 
 const clearBoard = () => {
+
     for (let i = 0; i < play.length; i++) {
         play[i].textContent = '';
     }
-}
+
+};
 
 const btn = document.getElementById('new-game');
 
 btn.addEventListener('click', (event) => {
     clearBoard();
-})
+});
